@@ -19,11 +19,9 @@ class Validator
         }
     }
 
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
+    // Start Validation Process
+    // Key will be the current data key, rules are the rules defined in the options of this key
+    // If there are errors found in the currently validated value, it will push the error into $this->errors
     public function validate($key, $rules)
     {
         foreach ($rules as $rule) {
@@ -35,6 +33,10 @@ class Validator
         }
     }
 
+    // This function actually validates a value with a rule
+    // Depends on what kind of rule is given it will run different version
+    // If a rule returns an error, it will also be returned up to the parent function
+    // This stops validation so the first error is always the only one shown
     private function validateRule($key, $rule)
     {
         $error = false;
@@ -76,36 +78,43 @@ class Validator
         return $error;
     }
 
+    // Rule to check if the value is empty or not
     private function checkEmptyRule($key, $rule)
     {
         return (strlen($this->data[$key]) === 0) ? $rule['message'] : false;
     }
 
+    // Rule to check if the value is longer than the min rule
     private function checkMinLengthRule($key, $rule)
     {
         return (strlen($this->data[$key]) < $rule['value']) ? $rule['message'] : false;
     }
 
+    // Rule to check if the value is shorter than the max rule
     private function checkMaxLengthRule($key, $rule)
     {
         return (strlen($this->data[$key]) > $rule['value']) ? $rule['message'] : false;
     }
 
+    // Checks if the value is a valid mail address
     private function checkEmailRule($key, $rule)
     {
         return (!filter_var($this->data[$key], FILTER_VALIDATE_EMAIL)) ? $rule['message'] : false;
     }
 
+    // Checks if the value is a valid URL (http + https format)
     private function checkURLRule($key, $rule)
     {
         return (!preg_match($this->regex['url'], $this->data[$key])) ? $rule['message'] : false;
     }
 
+    // Checks if the value is actually higher than the min rule
     private function checkMinRule($key, $rule)
     {
         return ($this->data[$key] < $rule['value']) ? $rule['message'] : false;
     }
 
+    // Checks if the value is actually lower than the max rule
     private function checkMaxRule($key, $rule)
     {
         return ($this->data[$key] > $rule['value']) ? $rule['message'] : false;

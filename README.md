@@ -1,3 +1,5 @@
+![Screenshot of a form validated with flynt-validator](screenshot.png)
+
 # Flynt Validator
 
 > A Flynt feature for data and form validation

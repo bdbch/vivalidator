@@ -1,22 +1,22 @@
-![Screenshot of a form validated with flynt-validator](screenshot.png)
+![Screenshot of a form validated with Vivalidator](screenshot.png)
 
-# Flynt Validator
+# Vivalidator
 
-> A Flynt feature for data and form validation
+> A simple and easy input and data validation library
 
 ## Why?
 
-I dislike the way of using Wordpress Plugins or heavy PHP packages for form development when it comes to Wordpress forms. I hate when third party code adds markup to your page or narrows my possibilites because of some restrictions coming with the external code. For forms I think it's enough to have a good validation feature in front of a simple wp_mail function. You don't want to have unescaped inputs in your mails so validation is necessary before submitting mails on your own via PHP.
+I dislike the way of using Wordpress Plugins or heavy PHP packages for form development when it comes to Wordpress forms. I hate when third party code adds markup to your page or narrows my possibilites because of some restrictions coming with the external code. Thats why I started looking for easy to use validation frameworks but didn't find anything that perfectly fits my needs. This is why I started development on Vivalidator.
 
 ## Installation
 
-1. Create a folder called `Validator` in your themes `Feature` folder.
-2. Copy the functions.php inside or use git to load it into your project.
-3. Open the `lib/init.php` and add the code below into the feature-load function
+#### The Composer Way
 
-```php
-add_theme_support('flynt-validator');
-```
+Run `composer require bdbch/vivalidator` in your project folder to install Vivalidator via Composer. It will be automatically placed into your autoload.
+
+#### Manual Way
+
+Make sure to have all necessary files copied manually into your project. Require the `vivalidator.php` to load all other necessary libraries.
 
 ## Usage
 
@@ -26,7 +26,7 @@ Using the Validator is simple. Check out this example code to get an idea on how
 <?php
 
 // Make sure to use the feature in your component
-use Flynt\Features\Validator\Validator;
+use Vivalidator\Validator;
 
 // Data to validate. I left the job empty on purpose to demonstrate non-valid data
 $data = [

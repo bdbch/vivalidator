@@ -1,5 +1,5 @@
 <?php
 
-namespace Flynt\Features\Validator;
+namespace Vivalidator;
 
 require_once(__DIR__ . '/lib/Validator.php');

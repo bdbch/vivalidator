@@ -1,7 +1,6 @@
 {
-    "name": "bdbch/flynt-validator",
-    "description": "Flynt feature for input validation",
-    "type": "flynt-feature",
+    "name": "bdbch/vivalidator",
+    "description": "Data validation library for simple input validations",
     "license": "MIT",
     "authors": [
         {

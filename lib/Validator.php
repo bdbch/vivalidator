@@ -1,6 +1,6 @@
 <?php
 
-namespace Flynt\Features\Validator;
+namespace Vivalidator;
 
 class Validator
 {

@@ -96,11 +96,7 @@ if (count($validator->errors)) {
 * `mail` - This checks if the submitted fields are valid emails
 
 #### Planned Rules
-* `min` - This checks if the submitted value is a number and higher than a specific value
-* `max` - This checks if the submitted value is a number and lower than a specific value
-* `number` - This checks if the submitted value is a number (int, float)
-* `int` - This checks if the submitted value is a integer
-* `float` - This checks if the submitted value is a float
+See [this issue](https://github.com/bdbch/flynt-validator/issues/1) to learn more
 
 ## Contribution
 

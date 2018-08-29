@@ -94,6 +94,7 @@ if (count($validator->errors)) {
 * `minlength` - This checks if the submitted fields content is longer than a specific value
 * `maxlength` - This checks if the submitted fields content is lower than a specific value
 * `mail` - This checks if the submitted fields are valid emails
+* `url` - This checks if the value is an URL
 
 #### Planned Rules
 See [this issue](https://github.com/bdbch/flynt-validator/issues/1) to learn more

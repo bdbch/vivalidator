@@ -75,6 +75,10 @@ class Validator
             case 'number':
                 $error = $this->checkNumberRule($key, $rule);
                 break;
+
+            case 'regex':
+                $error = $this->checkRegexRule($key, $rule);
+                break;
         }
 
         return $error;
@@ -118,5 +122,10 @@ class Validator
     private function checkNumberRule($key, $rule)
     {
         return (!is_numeric($this->data[$key])) ? $rule['message'] : false;
+    }
+
+    private function checkRegexRule($key, $rule)
+    {
+        return (!preg_match($rule['value'], $this->data[$key])) ? $rule['message'] : false;
     }
 }

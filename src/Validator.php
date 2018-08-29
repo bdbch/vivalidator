@@ -63,6 +63,14 @@ class Validator
             case 'url':
                 $error = $this->checkURLRule($key, $rule);
                 break;
+
+            case 'min':
+                $error = $this->checkMinRule($key, $rule);
+                break;
+
+            case 'max':
+                $error = $this->checkMaxRule($key, $rule);
+                break;
         }
 
         return $error;
@@ -91,5 +99,15 @@ class Validator
     private function checkURLRule($key, $rule)
     {
         return (!preg_match($this->regex['url'], $this->data[$key])) ? $rule['message'] : false;
+    }
+
+    private function checkMinRule($key, $rule)
+    {
+        return ($this->data[$key] < $rule['value']) ? $rule['message'] : false;
+    }
+
+    private function checkMaxRule($key, $rule)
+    {
+        return ($this->data[$key] > $rule['value']) ? $rule['message'] : false;
     }
 }

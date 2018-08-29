@@ -77,11 +77,6 @@ class Validator
 
     private function checkEmailState($key, $rule)
     {
-        if (strpos($this->data[$key], '@') !== false) {
-            $split = explode('@', $this->data[$key]);
-            return (strpos($split['1'], '.') === false ? $rule['message'] : false);
-        } else {
-            return $rule['message'];
-        }
+        return (!filter_var($this->data[$key], FILTER_VALIDATE_EMAIL)) ? $rule['message'] : false;
     }
 }

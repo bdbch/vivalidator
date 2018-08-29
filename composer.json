@@ -9,5 +9,7 @@
             "email": "6538827+bdbch@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "composer/installers": "~1.0"
+    }
 }

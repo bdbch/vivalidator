@@ -16,7 +16,7 @@ Run `composer require bdbch/vivalidator` in your project folder to install Vival
 
 #### Manual Way
 
-Make sure to have all necessary files copied manually into your project. Require the `vivalidator.php` to load all other necessary libraries.
+Make sure to have all necessary files copied manually into your project. Require the desired library from the `src` folder in your code to get access to a Vivalidator Class.
 
 ## Usage
 

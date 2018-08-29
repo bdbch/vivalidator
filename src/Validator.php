@@ -72,6 +72,10 @@ class Validator
                 $error = $this->checkNumberRule($key, $rule);
                 break;
 
+            case 'range':
+                $error = $this->checkRangeRule($key, $rule);
+                break;
+
             case 'regex':
                 $error = $this->checkRegexRule($key, $rule);
                 break;
@@ -113,6 +117,11 @@ class Validator
     private function checkMaxRule($key, $rule)
     {
         return ($this->data[$key] > $rule['value']) ? $rule['message'] : false;
+    }
+
+    private function checkRangeRule($key, $rule)
+    {
+        return ($this->data[$key] < $rule['values']['from'] || $this->data[$key] > $rule['values']['to']) ? $rule['message'] : false;
     }
 
     private function checkNumberRule($key, $rule)

@@ -90,6 +90,19 @@ if (count($validator->errors)) {
 // TODO: This will be a feature so fields can be escaped if needed
 ```
 
+## Adding ReCaptcha
+
+Vivalidator now has ReCaptcha Support! Just specify your Secret Key and the Error String as extra data to configure it right away! Make sure to have the ReCaptcha library installed manually or via `composer require google/recaptcha`.
+
+```php
+$validator = new Validator($data, $options, [
+  'recaptcha' => [
+    'secret' => 'YOUR_SECRET_KEY_HERE', // Check this URL: https://www.google.com/recaptcha/admin
+    'error' => 'Please verify our captcha'
+  ]
+]);
+```
+
 ## Rules
 
 * `empty` - This checks if the submitted field is empty or not filled

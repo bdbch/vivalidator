@@ -8,14 +8,19 @@ class Validator
         'url' => '/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/'
     ];
 
-    public function __construct($data = [], $options = [])
+    public function __construct($data = [], $options = [], $extra = [])
     {
         $this->options = $options;
         $this->data = $data;
+        $this->extra = $extra;
         $this->errors = [];
 
         foreach ($this->options as $key => $rules) {
             $this->validate($key, $rules);
+        }
+
+        if (isset($this->extra['recaptcha']) && isset($this->extra['recaptcha']['secret'])) {
+            $this->checkRecaptcha();
         }
     }
 
@@ -86,7 +91,7 @@ class Validator
 
     private function checkEmptyRule($key, $rule)
     {
-        return (strlen($this->data[$key]) === 0 || !isset($this->data[$key])) ? $rule['message'] : false;
+        return (!isset($this->data[$key]) || strlen($this->data[$key]) === 0) ? $rule['message'] : false;
     }
 
     private function checkMinLengthRule($key, $rule)
@@ -132,5 +137,27 @@ class Validator
     private function checkRegexRule($key, $rule)
     {
         return (!preg_match($rule['value'], $this->data[$key])) ? $rule['message'] : false;
+    }
+
+    private function checkRecaptcha()
+    {
+        if (!class_exists('\ReCaptcha\ReCaptcha')) {
+            return false;
+        }
+
+        $reCaptcha = new \ReCaptcha\ReCaptcha($this->extra['recaptcha']['secret']);
+        $res = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : false;
+
+        if (!$res) {
+            $this->errors[] = (isset($this->extra['recaptcha']['error'])) ? $this->extra['recaptcha']['error'] : 'Captcha was not verfied.';
+            return false;
+        }
+
+        $captchaValidator = $reCaptcha->verify($res);
+        if (!$captchaValidator->isSuccess()) {
+            $this->errors[] = (isset($this->extra['recaptcha']['error'])) ? $this->extra['recaptcha']['error'] : 'Captcha was not verfied.';
+        }
+
+        return false;
     }
 }

@@ -50,7 +50,7 @@ class Validator
         $error = false;
 
         switch ($rule['rule']) {
-            case 'empty':
+            case 'required':
                 $error = $this->checkEmptyRule($key, $rule);
                 break;
 
@@ -62,7 +62,7 @@ class Validator
                 $error = $this->checkMaxLengthRule($key, $rule);
                 break;
 
-            case 'mail':
+            case 'email':
                 $error = $this->checkEmailRule($key, $rule);
                 break;
 
@@ -82,7 +82,7 @@ class Validator
                 $error = $this->checkNumberRule($key, $rule);
                 break;
 
-            case 'range':
+            case 'between':
                 $error = $this->checkRangeRule($key, $rule);
                 break;
 

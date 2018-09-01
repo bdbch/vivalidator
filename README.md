@@ -40,7 +40,7 @@ $data = [
 $options = [
   'name' => [
     [
-      'rule' => 'empty',
+      'rule' => 'required',
       'message' => 'Please enter your name'
     ],
     [
@@ -51,7 +51,7 @@ $options = [
   ],
   'age' => [
     [
-      'rule' => 'empty',
+      'rule' => 'required',
       'message' => 'Please enter your age'
     ],
     [
@@ -67,7 +67,7 @@ $options = [
   ],
   'job' => [
     [
-      'rule' => 'empty',
+      'rule' => 'required',
       'message' => 'Please specify your job'
     ]
   ]
@@ -80,6 +80,9 @@ $validator = new Validator($data, $options);
 // If there are no errors, it will be an empty string
 if (count($validator->errors)) {
   echo 'You have ' . count($validator->errors) . ' errors in your submission.';
+  foreach ($validator->errors as $error) {
+    echo 'Error: ' . $error;
+  }
 } else {
   echo 'All set, lets submit!';
 }
@@ -95,9 +98,13 @@ if (count($validator->errors)) {
 Vivalidator now has ReCaptcha Support! Just specify your Secret Key and the Error String as extra data to configure it right away! Make sure to have the ReCaptcha library installed manually or via `composer require google/recaptcha`.
 
 ```php
+// Check this URL if you need a Key
+// https://www.google.com/recaptcha/admin
+// Make sure you have a working ReCaptcha library installed,
+// otherwise this will do nothing
 $validator = new Validator($data, $options, [
   'recaptcha' => [
-    'secret' => 'YOUR_SECRET_KEY_HERE', // Check this URL: https://www.google.com/recaptcha/admin
+    'secret' => 'YOUR_SECRET_KEY_HERE',
     'error' => 'Please verify our captcha'
   ]
 ]);
@@ -105,11 +112,16 @@ $validator = new Validator($data, $options, [
 
 ## Rules
 
-* `empty` - This checks if the submitted field is empty or not filled
-* `minlength` - This checks if the submitted fields content is longer than a specific value
-* `maxlength` - This checks if the submitted fields content is lower than a specific value
-* `mail` - This checks if the submitted fields are valid emails
-* `url` - This checks if the value is an URL
+* `required` - Checks if the input is not empty
+* `minlength` - Checks if the input is longer than a specific value
+* `maxlength` - Checks if the input is lower than a specific value
+* `email` - Checks if the input is a valid email
+* `url` - Checks if the input is an URL
+* `number` - Checks if the input is a number
+* `min` - Checks if the input is higher than the defined value
+* `max` - Checks if the input is lower than the defined value
+* `between` - Checks if the input is between two numbers (combination of max and min)
+* `regex` - Checks if the input matches a specified regex
 
 #### Planned Rules
 See [this issue](https://github.com/bdbch/flynt-validator/issues/1) to learn more

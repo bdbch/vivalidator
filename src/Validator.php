@@ -29,6 +29,11 @@ class Validator
         return $this->errors;
     }
 
+    public function addCustomError($error)
+    {
+        array_push($this->errors, $error);
+    }
+
     public function validate($key, $rules)
     {
         foreach ($rules as $rule) {

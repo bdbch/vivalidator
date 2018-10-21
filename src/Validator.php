@@ -96,52 +96,52 @@ class Validator
 
     private function checkEmptyRule($key, $rule)
     {
-        return (!isset($this->data[$key]) || strlen($this->data[$key]) === 0) ? $rule['message'] : false;
+        return (!isset($this->data[$key]) || strlen($this->data[$key]) === 0) ? $rule['error'] : false;
     }
 
     private function checkMinLengthRule($key, $rule)
     {
-        return (strlen($this->data[$key]) < $rule['value']) ? $rule['message'] : false;
+        return (strlen($this->data[$key]) < $rule['value']) ? $rule['error'] : false;
     }
 
     private function checkMaxLengthRule($key, $rule)
     {
-        return (strlen($this->data[$key]) > $rule['value']) ? $rule['message'] : false;
+        return (strlen($this->data[$key]) > $rule['value']) ? $rule['error'] : false;
     }
 
     private function checkEmailRule($key, $rule)
     {
-        return (!filter_var($this->data[$key], FILTER_VALIDATE_EMAIL)) ? $rule['message'] : false;
+        return (!filter_var($this->data[$key], FILTER_VALIDATE_EMAIL)) ? $rule['error'] : false;
     }
 
     private function checkURLRule($key, $rule)
     {
-        return (!preg_match($this->regex['url'], $this->data[$key])) ? $rule['message'] : false;
+        return (!preg_match($this->regex['url'], $this->data[$key])) ? $rule['error'] : false;
     }
 
     private function checkMinRule($key, $rule)
     {
-        return ($this->data[$key] < $rule['value']) ? $rule['message'] : false;
+        return ($this->data[$key] < $rule['value']) ? $rule['error'] : false;
     }
 
     private function checkMaxRule($key, $rule)
     {
-        return ($this->data[$key] > $rule['value']) ? $rule['message'] : false;
+        return ($this->data[$key] > $rule['value']) ? $rule['error'] : false;
     }
 
     private function checkRangeRule($key, $rule)
     {
-        return ($this->data[$key] < $rule['values']['from'] || $this->data[$key] > $rule['values']['to']) ? $rule['message'] : false;
+        return ($this->data[$key] < $rule['values']['from'] || $this->data[$key] > $rule['values']['to']) ? $rule['error'] : false;
     }
 
     private function checkNumberRule($key, $rule)
     {
-        return (!is_numeric($this->data[$key])) ? $rule['message'] : false;
+        return (!is_numeric($this->data[$key])) ? $rule['error'] : false;
     }
 
     private function checkRegexRule($key, $rule)
     {
-        return (!preg_match($rule['value'], $this->data[$key])) ? $rule['message'] : false;
+        return (!preg_match($rule['value'], $this->data[$key])) ? $rule['error'] : false;
     }
 
     private function checkRecaptcha()

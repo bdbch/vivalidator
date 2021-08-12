@@ -41,34 +41,34 @@ $options = [
   'name' => [
     [
       'rule' => 'required',
-      'message' => 'Please enter your name'
+      'error' => 'Please enter your name'
     ],
     [
       'rule' => 'minlength',
       'value' => 3,
-      'message' => 'Your name needs to be longer than 3 characters.'
+      'error' => 'Your name needs to be longer than 3 characters.'
     ]
   ],
   'age' => [
     [
       'rule' => 'required',
-      'message' => 'Please enter your age'
+      'error' => 'Please enter your age'
     ],
     [
       'rule' => 'min',
       'value' => 1,
-      'message' => 'You need to be older than 1'
+      'error' => 'You need to be older than 1'
     ],
     [
       'rule' => 'max',
       'value' => 150,
-      'message' => 'I would love to believe you, but I will not'
+      'error' => 'I would love to believe you, but I will not'
     ]
   ],
   'job' => [
     [
       'rule' => 'required',
-      'message' => 'Please specify your job'
+      'error' => 'Please specify your job'
     ]
   ]
 ];
